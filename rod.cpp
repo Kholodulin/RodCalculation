@@ -12,16 +12,19 @@ void Rod::addRoundSegment(double length, double radius, double force)
   double pi = std::acos(-1);
   double area =  pi * radius * radius;
   segments.push_back(RodSegment(length,area,force));
+  segments.back().shape = SegmentShape::CIRCLE;
 }
 
 void Rod::addRectangularSegment(double width, double height, double length, double force)
 {
   segments.push_back(RodSegment(length, width * height, force));
+  segments.back().shape = SegmentShape::RECTANGLE;
 }
 
 void Rod::addRandomShapedSegment(double area, double length,  double force)
 {
   segments.push_back(RodSegment(length,area,force));
+  segments.back().shape = SegmentShape::OTHER;
 }
 
 void Rod::deleteSegment(size_t index)
