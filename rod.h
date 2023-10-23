@@ -7,22 +7,34 @@
 class Rod
 {
 public:
-  explicit Rod( size_t _segmentsNum, double _forceAtTheEnd );
-  void fillSegmentsСharacteristics();
-  void rodCalculate();
+  explicit Rod();
+  void addRoundSegment(double radius, double length, double force);
+  void addRectangularSegment(double width, double height, double length, double force);
+  void addRandomShapedSegment(double area, double length,  double force);
+  void deleteSegment(size_t index);
+  double getSegmentLongitudinalForce(int segmentIndex) const;
   void setForceAtTheEnd( double f );
-  void printResult();
-  double circleAreaCalculate( double D );
-  double circleMomentOfInertiaCalculate( double D,
-                                         double d = 0 ); //D-внешний,d-внутренний(для трубы)
-  double rectangleAreaCalculate( double width, double height );
-  double rectangleMomentOfInertiaCalculate( double width, double height );
+  void rodCalculate();
+  int getSegmentsCount();
+  int64_t getSegmentStress(int segmentIndex) const;
+  double getSegmentExtension(int segmentIndex) const;
+  double getTotalExtension() const;
 private:
   void nCalculate();
   void stressCalculate();
   void extensionCalculate();
 private:
-  size_t segmentsNum;
+    struct RodSegment
+    {
+        RodSegment(double len, double a, double f)
+            : length(len), area(a), force(f) {}
+        double length;
+        double area;
+        double force;
+        double longitudinalForce; //Продольная сила на участке
+        int64_t stress; //Напряжения участка
+        double extension; //Удлинение участка
+    };
   double forceAtTheEnd;
   double totalRodExtensions;
   int E; //Модуль упругости * 10кПА
@@ -32,18 +44,7 @@ private:
     RECTANGLE,
     OTHER
   };
-  class RodSegment
-  {
-  public:
-    SegmentShape shape; //форма
-    double length;
-    double area;
-    double force;
-    double N; //Продольная сила на участке
-    int64_t stress; //Напряжения в стержне
-    double extension; //Удлинение участка
-    double momentOfInertia; // Момент инерции
-  };
+
   std::vector<RodSegment> segments;
 };
 

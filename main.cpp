@@ -4,22 +4,23 @@
 #include <limits>
 #include "rod.h"
 
-using std::cin;
-using std::cout;
-
 int main()
 {
-  size_t segmentsNum;
-  double f;
-  cout << "Enter the number of rod segments ";
-  cin >> segmentsNum;
-  cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
-  cout << "Force at the end of the rod: ";
-  cin >> f;
-  Rod rod( segmentsNum, f );
-  rod.rodCalculate();
-  rod.printResult();
+    Rod rod;
+    rod.addRandomShapedSegment(0.3, 0.8, 20);
+    rod.addRandomShapedSegment(0.8, 2, 50);
+    rod.addRandomShapedSegment(0.5, 1.2, 0);
+    rod.setForceAtTheEnd(-30);
 
+    rod.rodCalculate();
+
+    for(int i=0;i<rod.getSegmentsCount();++i ){
+        std::cout << "Segment" << i+1 << std::endl;
+        std::cout << "longitudinal force = " << rod.getSegmentLongitudinalForce(i) << std::endl;
+        std::cout << "Stress = " << rod.getSegmentStress(i) << std::endl;
+        std::cout << "Extensions = " << rod.getSegmentExtension(i) << std::endl<< std::endl;
+    }
+    std::cout << "total Extensions of rod - " << rod.getTotalExtension() << std::endl;
   system( "pause" );
   return 0;
 }
