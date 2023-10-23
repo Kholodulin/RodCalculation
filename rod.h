@@ -24,27 +24,27 @@ private:
   void stressCalculate();
   void extensionCalculate();
 private:
-    struct RodSegment
-    {
-        RodSegment(double len, double a, double f)
-            : length(len), area(a), force(f) {}
-        double length;
-        double area;
-        double force;
-        double longitudinalForce; //Продольная сила на участке
-        int64_t stress; //Напряжения участка
-        double extension; //Удлинение участка
-    };
+  enum class SegmentShape
+  {
+      CIRCLE,
+      RECTANGLE,
+      OTHER
+  };
+  struct RodSegment
+  {
+      RodSegment(double len, double a, double f)
+          : length(len), area(a), force(f) {}
+      double length;
+      double area;
+      double force;
+      SegmentShape shape;
+      double longitudinalForce; //Продольная сила на участке
+      int64_t stress; //Напряжения участка
+      double extension; //Удлинение участка
+  };
   double forceAtTheEnd;
   double totalRodExtensions;
   int E; //Модуль упругости * 10кПА
-  enum class SegmentShape
-  {
-    CIRCLE,
-    RECTANGLE,
-    OTHER
-  };
-
   std::vector<RodSegment> segments;
 };
 
