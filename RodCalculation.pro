@@ -1,11 +1,11 @@
 TEMPLATE = app
-           CONFIG += console c++17
+           CONFIG += console c++17 qt widgets
                      CONFIG -= app_bundle
-                               CONFIG -= qt
+                               QT += core gui widgets
 
-                                         SOURCES += \
-                                                    main.cpp \
-                                                    rod.cpp
+                                     SOURCES += \
+                                                main.cpp \
+                                                rod.cpp
 
-                                                    HEADERS += \
-                                                               rod.h
+                                                HEADERS += \
+                                                           rod.h
