@@ -5,11 +5,13 @@
 #include <QtGui>
 
 #include "rod.h"
+#include "beamdrawer.h"
 
 int main( int argc, char* argv[] )
 {
   QGuiApplication app( argc, argv );
   Rod rod;
+  BeamDrawer beamDrawer(rod);
   rod.addRandomSegment( 0.5, 1.2, 0 );
   rod.addRandomSegment( 0.8, 2, 50 );
   rod.addRandomSegment( 0.3, 0.8, 20 );
@@ -23,6 +25,6 @@ int main( int argc, char* argv[] )
   }
   std::cout << "total Extensions of test rod = " << rod.getTotalExtension() << std::endl;
 
-  rod.drawResult();
+  beamDrawer.drawResult();
   return app.exec();
 }

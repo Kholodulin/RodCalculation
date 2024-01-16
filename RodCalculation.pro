@@ -4,8 +4,10 @@ CONFIG -= app_bundle
 QT += core gui widgets
 
 SOURCES += \
+    beamdrawer.cpp \
     main.cpp \
     rod.cpp
 
     HEADERS += \
+    beamdrawer.h \
         rod.h

@@ -10,6 +10,8 @@
 #include <QPainterPath>
 #include <memory>
 
+class BeamDrawer;
+
 class Rod
 {
 private:
@@ -27,16 +29,12 @@ public:
     int64_t getSegmentStress( int segmentIndex ) const;
     double getSegmentExtension( int segmentIndex ) const;
     double getTotalExtension() const;
-    void drawResult();
 private:
     void calculateLongitudinalForce();
     void calculateStress();
     void calculateSxtension();
     void addSegment(std::shared_ptr<Segment> segment);
-    void drawRod();
-    void drawLongitudinalForce();
-    void drawStress();
-    void drawExtension();
+    friend class BeamDrawer;
 
 private:
     enum class SegmentShape
@@ -95,6 +93,7 @@ private:
     double totalRodExtensions;
     int E; //Модуль упругости * 10кПА
     std::vector<std::shared_ptr<Segment>> segments;
+
 };
 
 #endif // ROD_H
